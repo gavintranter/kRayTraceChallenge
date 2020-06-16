@@ -222,5 +222,20 @@ object TuplesSpec: Spek({
                 }
             }
         }
+
+        describe("Cross Product") {
+            describe("of two vectors") {
+                val v1 by memoized { vector(1.0, 2.0, 3.0) }
+                val v2 by memoized { vector(2.0, 3.0, 4.0) }
+
+                it("cross product of v1, v2 will be vector (-1.0, 2.0, -1.0)") {
+                    assertEquals(vector(-1.0, 2.0, -1.0), v1 cross v2)
+                }
+
+                it("cross product of v2, v1 will be vector (1.0, -2.0, 1.0)") {
+                    assertEquals(vector(-1.0, 2.0, -1.0), v1 cross v2)
+                }
+            }
+        }
     }
 })

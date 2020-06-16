@@ -107,4 +107,12 @@ data class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
 
         return Tuple(dx, dy, dz, dw)
     }
+
+    infix fun cross(other: Tuple): Tuple {
+        val dx = (y * other.z) - (z * other.y)
+        val dy = (z * other.x) - (x * other.z)
+        val dz = (x * other.y) - (y * other.x)
+
+        return vector(dx, dy, dz)
+    }
 }
