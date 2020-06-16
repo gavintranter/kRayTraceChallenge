@@ -1,7 +1,6 @@
 package org.example
 
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNotEquals
+import org.junit.jupiter.api.Assertions.*
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 
@@ -18,37 +17,117 @@ object TuplesSpec: Spek({
 
     describe("points") {
         describe("tuple with w=1.0") {
-            val point by memoized { Tuple(4.3, -4.2, 3.1, 1.0) }
+            val point by memoized { Tuple.point(4.3, -4.2, 3.1) }
 
             it("is a point") {
-                assertEquals(point.isPoint(), true)
+                assertEquals(true, point.isPoint())
             }
 
             it("is not a vector") {
-                assertEquals(point.isVector(), false)
-            }
-
-            it("can be created with a point function") {
-                assertEquals(Tuple.point(4.3, -4.2, 3.1), point)
+                assertEquals(false, point.isVector())
             }
         }
     }
 
     describe("vectors") {
         describe("tuple with w=0.0") {
-            val vector by memoized { Tuple(4.3, -4.2, 3.1, 0.0) }
+            val vector by memoized { Tuple.vector(4.3, -4.2, 3.1) }
 
             it("is a vector") {
-                assertEquals(vector.isPoint(), false)
+                assertEquals(false, vector.isPoint())
             }
 
             it("is not a point") {
-                assertEquals(vector.isVector(), true)
-            }
-
-            it("can be created with a vector function") {
-                assertEquals(Tuple.vector(4.3, -4.2, 3.1), vector)
+                assertEquals(true, vector.isVector())
             }
         }
+    }
+
+    describe("operations") {
+        val point by memoized { Tuple(3.0, -2.0, 5.0, 1.0) }
+        val vector by memoized { Tuple(-2.0, 3.0, 1.0, 0.0) }
+
+        describe("addition") {
+            describe("adding a point and a vector") {
+                val result = point + vector
+
+                it("will be a point") {
+                    assertEquals(Tuple.point(1.0, 1.0, 6.0), result)
+                }
+            }
+
+            describe("adding two vectors") {
+                val result = vector + vector
+
+                it("will be a vector") {
+                    assertEquals(Tuple.vector(-4.0, 6.0, 2.0), result)
+                }
+            }
+
+            describe("adding two points") {
+                val result = point + point
+
+                it("will be neither a point nor a vector") {
+                    assertEquals(Tuple(6.0, -4.0, 10.0, 2.0), result)
+                    assertFalse(result.isVector())
+                    assertFalse(result.isPoint())
+                }
+            }
+        }
+
+        describe("Subtraction") {
+            describe("subtracting two points") {
+                val result = point - point
+
+                it("will be a vector") {
+                    assertEquals(Tuple.vector(0.0, 0.0, 0.0), result)
+                }
+            }
+
+            describe("subtract a vector from a point") {
+                val result = point - vector
+
+                it("will be a point") {
+                    assertEquals(Tuple.point(5.0, -5.0, 4.0), result)
+                }
+            }
+
+            describe("subtract a vector from a vector") {
+                val result = vector - vector
+
+                it("will be a vector") {
+                    assertEquals(Tuple.vector(0.0, 0.0, 0.0), result)
+                }
+            }
+
+            describe("subtract point from vector") {
+                val result = vector - point
+
+                it("will be neither a point nor vector") {
+                    assertEquals(Tuple(-5.0, 5.0, -4.0, -1.0), result)
+                    assertFalse(result.isPoint())
+                    assertFalse(result.isVector())
+                }
+            }
+        }
+
+        describe("Negation") {
+            describe("subtracting a vector from the zero vector") {
+                val result = Tuple.ZERO_VECTOR - vector
+
+                it("the vector will be negated") {
+                    assertEquals(Tuple.vector(2.0, -3.0, -1.0), result)
+                }
+            }
+
+            describe("negating a vector") {
+                val result = -vector
+
+                it("will give a negated vector") {
+                    assertEquals(Tuple.vector(2.0, -3.0, -1.0), result)
+                }
+            }
+        }
+
     }
 })

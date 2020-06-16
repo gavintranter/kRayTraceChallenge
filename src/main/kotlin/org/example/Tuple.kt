@@ -39,6 +39,8 @@ data class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
 
 
     companion object Factory {
+        val ZERO_VECTOR = Tuple(0.0, 0.0, 0.0, 0.0)
+
         fun point(x: Double, y: Double, z: Double): Tuple {
             return Tuple(x, y, z, 1.0)
         }
@@ -46,5 +48,27 @@ data class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
         fun vector(x: Double, y: Double, z: Double): Tuple {
             return Tuple(x, y, z, 0.0)
         }
+    }
+
+    operator fun plus(other: Tuple): Tuple {
+        val dx = x + other.x
+        val dy = y + other.y
+        val dz = z + other.z
+        val dw = w + other.w
+
+        return Tuple(dx, dy, dz, dw)
+    }
+
+    operator fun minus(other: Tuple): Tuple {
+        val dx = x - other.x
+        val dy = y - other.y
+        val dz = z - other.z
+        val dw = w - other.w
+
+        return Tuple(dx, dy, dz, dw)
+    }
+
+    operator fun unaryMinus(): Tuple {
+        return ZERO_VECTOR - this
     }
 }
