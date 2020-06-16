@@ -10,6 +10,10 @@ data class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
         sqrt((x * x) + (y * y) + (z * z) + (w * w))
     }
 
+    val normalised: Tuple by lazy {
+        Tuple((x/magnitude), (y/magnitude), (z/magnitude), (w/magnitude))
+    }
+
     fun isPoint(): Boolean {
         return equal(w, 1.0)
     }

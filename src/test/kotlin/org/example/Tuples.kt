@@ -192,5 +192,23 @@ object TuplesSpec: Spek({
                 }
             }
         }
+
+        describe("Normalisation") {
+            describe("normalising vector (4.0, 0.0, 0.0)") {
+                val v by memoized { vector(4.0, 0.0, 0.0) }
+
+                it("will give a vector (1.0, 0.0, 0.0") {
+                    assertEquals(vector(1.0, 0.0, 0.0), v.normalised)
+                }
+            }
+
+            describe("normalising vector (1.0, 2.0, 3.0)") {
+                val v by memoized { vector(1.0, 2.0, 3.0) }
+
+                it("will give a vector (≈0.26726, ≈0.53452, ≈0.80178") {
+                    assertEquals(vector(0.26726, 0.53452, 0.80178), v.normalised)
+                }
+            }
+        }
     }
 })
