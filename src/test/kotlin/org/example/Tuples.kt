@@ -214,11 +214,10 @@ object TuplesSpec: Spek({
         describe("Dot Product") {
             describe("of two tuples") {
                 val v1 by memoized { vector(1.0, 2.0, 3.0) }
-                val v2 by memoized { vector(2.0, 4.0, 4.0) }
+                val v2 by memoized { vector(2.0, 3.0, 4.0) }
 
-                it("give a the vector (2.0, 8.0, 12.0)") {
-                    assertEquals(vector(2.0, 8.0, 12.0), v1.dot(v2))
-                    assertEquals(vector(2.0, 8.0, 12.0), v1 dot v2)
+                it("give a the scalar 20.0") {
+                    assertEquals(20.0, v1 dot v2)
                 }
             }
         }

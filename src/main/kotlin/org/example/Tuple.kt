@@ -99,13 +99,13 @@ data class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
         return ZERO_VECTOR - this
     }
 
-    infix fun dot(other: Tuple): Tuple {
+    infix fun dot(other: Tuple): Double {
         val dx = x * other.x
         val dy = y * other.y
         val dz = z * other.z
         val dw = w * other.w
 
-        return Tuple(dx, dy, dz, dw)
+        return dx + dy + dz + dw
     }
 
     infix fun cross(other: Tuple): Tuple {
