@@ -1,1 +1,3 @@
 # kRayTraceChallenge
+
+* Chapter one complete
