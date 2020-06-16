@@ -98,4 +98,13 @@ data class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
     operator fun unaryMinus(): Tuple {
         return ZERO_VECTOR - this
     }
+
+    infix fun dot(other: Tuple): Tuple {
+        val dx = x * other.x
+        val dy = y * other.y
+        val dz = z * other.z
+        val dw = w * other.w
+
+        return Tuple(dx, dy, dz, dw)
+    }
 }
