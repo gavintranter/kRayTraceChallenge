@@ -1,9 +1,12 @@
 package org.example
 
 import kotlin.math.abs
+import kotlin.math.sqrt
 
 data class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
     private val EPSILON = 0.00001
+
+    val magnitude = sqrt((x * x) + (y * y) + (z * z) + (w * w))
 
     fun isPoint(): Boolean {
         return equal(w, 1.0)

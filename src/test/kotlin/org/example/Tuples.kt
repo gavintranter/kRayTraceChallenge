@@ -4,6 +4,7 @@ import org.example.Tuple.Factory.vector
 import org.junit.jupiter.api.Assertions.*
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
+import kotlin.math.sqrt
 
 object TuplesSpec: Spek({
     describe("Equals") {
@@ -146,6 +147,48 @@ object TuplesSpec: Spek({
 
                 it("will create a scaled tuple") {
                     assertEquals(Tuple(1.5, -1.0, 2.5, 0.5), result)
+                }
+            }
+        }
+
+        describe("Magnitude") {
+            describe("computing magnitude of vector (1.0, 0.0, 0.0)") {
+                val v by memoized { vector(1.0, 0.0, 0.0) }
+
+                it("will be 1") {
+                    assertEquals(1.0, v.magnitude)
+                }
+            }
+
+            describe("computing magnitude of vector (0.0, 1.0, 0.0)") {
+                val v by memoized { vector(0.0, 1.0, 0.0) }
+
+                it("will be 1") {
+                    assertEquals(1.0, v.magnitude)
+                }
+            }
+
+            describe("computing magnitude of vector (0.0, 0.0, 1.0)") {
+                val v by memoized { vector(0.0, 0.0, 1.0) }
+
+                it("will be 1") {
+                    assertEquals(1.0, v.magnitude)
+                }
+            }
+
+            describe("computing magnitude of vector (1.0, 2.0, 3.0)") {
+                val v by memoized { vector(1.0, 2.0, 3.0) }
+
+                it("will be the square root of 14") {
+                    assertEquals(sqrt(14.0), v.magnitude)
+                }
+            }
+
+            describe("computing magnitude of vector (-1.0, -2.0, -3.0)") {
+                val v by memoized { vector(-1.0, -2.0, -3.0) }
+
+                it("will be the square root of 14") {
+                    assertEquals(sqrt(14.0), v.magnitude)
                 }
             }
         }
