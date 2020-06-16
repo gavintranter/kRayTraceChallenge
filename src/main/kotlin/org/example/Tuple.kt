@@ -68,6 +68,24 @@ data class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
         return Tuple(dx, dy, dz, dw)
     }
 
+    operator fun times(scalar: Double): Tuple {
+        val dx = x * scalar
+        val dy = y * scalar
+        val dz = z * scalar
+        val dw = w * scalar
+
+        return Tuple(dx, dy, dz, dw)
+    }
+
+    operator fun div(scalar: Double): Tuple {
+        val dx = x / scalar
+        val dy = y / scalar
+        val dz = z / scalar
+        val dw = w / scalar
+
+        return Tuple(dx, dy, dz, dw)
+    }
+
     operator fun unaryMinus(): Tuple {
         return ZERO_VECTOR - this
     }

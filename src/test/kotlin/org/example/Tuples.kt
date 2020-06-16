@@ -1,11 +1,12 @@
 package org.example
 
+import org.example.Tuple.Factory.vector
 import org.junit.jupiter.api.Assertions.*
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 
 object TuplesSpec: Spek({
-    describe("equals") {
+    describe("Equals") {
         it("a difference less than 0.00001 is equal") {
             assertEquals(Tuple(1.0, 0.0, 0.0, 1.0), Tuple(1.000009, 0.0, 0.0, 1.0))
         }
@@ -15,7 +16,7 @@ object TuplesSpec: Spek({
         }
     }
 
-    describe("points") {
+    describe("Points") {
         describe("tuple with w=1.0") {
             val point by memoized { Tuple.point(4.3, -4.2, 3.1) }
 
@@ -29,9 +30,9 @@ object TuplesSpec: Spek({
         }
     }
 
-    describe("vectors") {
+    describe("Vectors") {
         describe("tuple with w=0.0") {
-            val vector by memoized { Tuple.vector(4.3, -4.2, 3.1) }
+            val vector by memoized { vector(4.3, -4.2, 3.1) }
 
             it("is a vector") {
                 assertEquals(false, vector.isPoint())
@@ -43,11 +44,11 @@ object TuplesSpec: Spek({
         }
     }
 
-    describe("operations") {
+    describe("Operations") {
         val point by memoized { Tuple(3.0, -2.0, 5.0, 1.0) }
         val vector by memoized { Tuple(-2.0, 3.0, 1.0, 0.0) }
 
-        describe("addition") {
+        describe("Addition") {
             describe("adding a point and a vector") {
                 val result = point + vector
 
@@ -60,7 +61,7 @@ object TuplesSpec: Spek({
                 val result = vector + vector
 
                 it("will be a vector") {
-                    assertEquals(Tuple.vector(-4.0, 6.0, 2.0), result)
+                    assertEquals(vector(-4.0, 6.0, 2.0), result)
                 }
             }
 
@@ -80,7 +81,7 @@ object TuplesSpec: Spek({
                 val result = point - point
 
                 it("will be a vector") {
-                    assertEquals(Tuple.vector(0.0, 0.0, 0.0), result)
+                    assertEquals(vector(0.0, 0.0, 0.0), result)
                 }
             }
 
@@ -96,7 +97,7 @@ object TuplesSpec: Spek({
                 val result = vector - vector
 
                 it("will be a vector") {
-                    assertEquals(Tuple.vector(0.0, 0.0, 0.0), result)
+                    assertEquals(vector(0.0, 0.0, 0.0), result)
                 }
             }
 
@@ -116,7 +117,7 @@ object TuplesSpec: Spek({
                 val result = Tuple.ZERO_VECTOR - vector
 
                 it("the vector will be negated") {
-                    assertEquals(Tuple.vector(2.0, -3.0, -1.0), result)
+                    assertEquals(vector(2.0, -3.0, -1.0), result)
                 }
             }
 
@@ -124,10 +125,29 @@ object TuplesSpec: Spek({
                 val result = -vector
 
                 it("will give a negated vector") {
-                    assertEquals(Tuple.vector(2.0, -3.0, -1.0), result)
+                    assertEquals(vector(2.0, -3.0, -1.0), result)
                 }
             }
         }
 
+        describe("Multiplication") {
+            describe("multiplying by a scalar value") {
+                val result = point * 3.5
+
+                it("will create a scaled tuple") {
+                    assertEquals(Tuple(10.5, -7.0, 17.5, 3.5), result)
+                }
+            }
+        }
+
+        describe("Division") {
+            describe("dividing by a scalar") {
+                val result = point / 2.0
+
+                it("will create a scaled tuple") {
+                    assertEquals(Tuple(1.5, -1.0, 2.5, 0.5), result)
+                }
+            }
+        }
     }
 })
