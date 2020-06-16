@@ -6,11 +6,11 @@ data class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
     private val EPSILON = 0.00001
 
     fun isPoint(): Boolean {
-        return w > 0.0
+        return equal(w, 1.0)
     }
 
     fun isVector(): Boolean {
-        return !isPoint()
+        return equal(w, 0.0)
     }
 
     private fun equal(a: Double, b: Double) = abs(a - b) < EPSILON
