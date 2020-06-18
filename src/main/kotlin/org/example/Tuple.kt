@@ -131,6 +131,12 @@ data class Color(val r: Double, val g: Double, val b: Double, val a: Double) {
     }
 
     companion object Factory {
+        val BLACK = Color(0.0, 0.0, 0.0, 0.0)
+        val WHITE = Color(1.0, 1.0, 1.0, 1.0)
+        val RED = Color(1.0, 0.0, 0.0, 0.0)
+        val GREEN = Color(0.0, 1.0, 0.0, 0.0)
+        val BLUE = Color(0.0, 0.0, 1.0, 0.0)
+
         fun color(r: Double, g: Double, b: Double): Color {
             return Color(r, g, b, 0.0)
         }
