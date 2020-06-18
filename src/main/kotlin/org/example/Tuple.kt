@@ -57,6 +57,10 @@ data class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
         fun vector(x: Double, y: Double, z: Double): Tuple {
             return Tuple(x, y, z, 0.0)
         }
+
+        fun color(r: Double, g: Double, b: Double): Tuple {
+            return Tuple(r, g, b, -1.0)
+        }
     }
 
     operator fun plus(other: Tuple): Tuple {

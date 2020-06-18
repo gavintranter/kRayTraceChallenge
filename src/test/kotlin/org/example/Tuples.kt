@@ -1,5 +1,7 @@
 package org.example
 
+import org.example.Tuple.Factory.color
+import org.example.Tuple.Factory.point
 import org.example.Tuple.Factory.vector
 import org.junit.jupiter.api.Assertions.*
 import org.spekframework.spek2.Spek
@@ -19,7 +21,7 @@ object TuplesSpec: Spek({
 
     describe("Points") {
         describe("tuple with w=1.0") {
-            val point by memoized { Tuple.point(4.3, -4.2, 3.1) }
+            val point by memoized { point(4.3, -4.2, 3.1) }
 
             it("is a point") {
                 assertEquals(true, point.isPoint())
@@ -36,12 +38,24 @@ object TuplesSpec: Spek({
             val vector by memoized { vector(4.3, -4.2, 3.1) }
 
             it("is a vector") {
-                assertEquals(false, vector.isPoint())
+                assertEquals(true, vector.isVector())
             }
 
             it("is not a point") {
-                assertEquals(true, vector.isVector())
+                assertEquals(false, vector.isPoint())
             }
+        }
+    }
+
+    describe("Colours") {
+        val colour by memoized { color(0.9, 0.6, 0.75) }
+
+        it("is not a vector") {
+            assertEquals(false, colour.isVector())
+        }
+
+        it("is not a point") {
+            assertEquals(false, colour.isPoint())
         }
     }
 
@@ -54,7 +68,7 @@ object TuplesSpec: Spek({
                 val result = point + vector
 
                 it("will be a point") {
-                    assertEquals(Tuple.point(1.0, 1.0, 6.0), result)
+                    assertEquals(point(1.0, 1.0, 6.0), result)
                 }
             }
 
@@ -90,7 +104,7 @@ object TuplesSpec: Spek({
                 val result = point - vector
 
                 it("will be a point") {
-                    assertEquals(Tuple.point(5.0, -5.0, 4.0), result)
+                    assertEquals(point(5.0, -5.0, 4.0), result)
                 }
             }
 
