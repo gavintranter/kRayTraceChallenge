@@ -3,6 +3,9 @@ package org.example
 import kotlin.math.abs
 import kotlin.math.sqrt
 
+typealias Point = Tuple
+typealias Vector = Tuple
+
 data class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
     private val EPSILON = 0.00001
 
@@ -46,16 +49,15 @@ data class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
         return result
     }
 
-
     companion object Factory {
         val ZERO_VECTOR = Tuple(0.0, 0.0, 0.0, 0.0)
 
         fun point(x: Double, y: Double, z: Double): Tuple {
-            return Tuple(x, y, z, 1.0)
+            return Point(x, y, z, 1.0)
         }
 
         fun vector(x: Double, y: Double, z: Double): Tuple {
-            return Tuple(x, y, z, 0.0)
+            return Vector(x, y, z, 0.0)
         }
     }
 
@@ -163,7 +165,7 @@ data class Color(val r: Double, val g: Double, val b: Double, val a: Double) {
 
         other as Color
 
-        return tuple.equals(other.tuple)
+        return tuple == other.tuple
     }
 
     override fun hashCode(): Int {
