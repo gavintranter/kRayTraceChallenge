@@ -57,10 +57,6 @@ data class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
         fun vector(x: Double, y: Double, z: Double): Tuple {
             return Tuple(x, y, z, 0.0)
         }
-
-        fun color(r: Double, g: Double, b: Double): Tuple {
-            return Tuple(r, g, b, -1.0)
-        }
     }
 
     operator fun plus(other: Tuple): Tuple {
@@ -119,4 +115,59 @@ data class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
 
         return vector(dx, dy, dz)
     }
+}
+
+data class Color(val r: Double, val g: Double, val b: Double, val a: Double) {
+    private val tuple = Tuple(r, g, b, a)
+
+    fun isPoint(): Boolean {
+        return false
+    }
+
+    fun isVector(): Boolean {
+        return false
+    }
+
+    companion object Factory {
+        fun color(r: Double, g: Double, b: Double): Color {
+            return Color(r, g, b, 0.0)
+        }
+    }
+
+    operator fun plus(other: Color): Color {
+        val result = tuple + other.tuple
+        return Color(result.x, result.y, result.z, result.w)
+    }
+
+    operator fun minus(other: Color): Color {
+        val result = tuple - other.tuple
+        return Color(result.x, result.y, result.z, result.w)
+    }
+
+    operator fun times(scalar: Double): Color {
+        val result = tuple * scalar
+        return Color(result.x, result.y, result.z, result.w)
+    }
+
+    operator fun times(other: Color): Color {
+        val dr = r * other.r
+        val dg = g * other.g
+        val db = b * other.b
+
+        return Color(dr, dg, db, a)
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Color
+
+        return tuple.equals(other.tuple)
+    }
+
+    override fun hashCode(): Int {
+        return tuple.hashCode()
+    }
+
 }

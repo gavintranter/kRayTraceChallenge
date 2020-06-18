@@ -1,6 +1,6 @@
 package org.example
 
-import org.example.Tuple.Factory.color
+import org.example.Color.Factory.color
 import org.example.Tuple.Factory.point
 import org.example.Tuple.Factory.vector
 import org.junit.jupiter.api.Assertions.*
@@ -89,6 +89,17 @@ object TuplesSpec: Spek({
                     assertFalse(result.isPoint())
                 }
             }
+
+            describe("adding colours") {
+                val c1 = color(0.9, 0.6, 0.75)
+                val c2 = color(0.7, 0.1, 0.25)
+
+                val result = c1 + c2
+
+                it("will be the colour (1.6, 0.7, 1.0") {
+                    assertEquals(color(1.6, 0.7, 1.0), result)
+                }
+            }
         }
 
         describe("Subtraction") {
@@ -125,6 +136,17 @@ object TuplesSpec: Spek({
                     assertFalse(result.isVector())
                 }
             }
+
+            describe("subtracting colours") {
+                val c1 = color(0.9, 0.6, 0.75)
+                val c2 = color(0.7, 0.1, 0.25)
+
+                val result = c1 - c2
+
+                it("will be the colour (0.2, 0.5, 0.5") {
+                    assertEquals(color(0.2, 0.5, 0.5), result)
+                }
+            }
         }
 
         describe("Negation") {
@@ -151,6 +173,27 @@ object TuplesSpec: Spek({
 
                 it("will create a scaled tuple") {
                     assertEquals(Tuple(10.5, -7.0, 17.5, 3.5), result)
+                }
+            }
+
+            describe("multiplying colour by a scalar value") {
+                val c = color(0.2, 0.3, 0.4)
+
+                val result = c * 2.0
+
+                it("will be the colour (0.4, 0.6, 0.8") {
+                    assertEquals(color(0.4, 0.6, 0.8), result)
+                }
+            }
+
+            describe("multiplying colour by a tuple") {
+                val c1 = color(1.0, 0.2, 0.4)
+                val c2 = color(0.9, 1.0, 0.1)
+
+                val result = c1 * c2
+
+                it("will be the colour (0.9, 0.2, 0.04") {
+                    assertEquals(color(0.9, 0.2, 0.04), result)
                 }
             }
         }
