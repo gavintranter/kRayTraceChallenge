@@ -3,6 +3,14 @@ package org.example
 import kotlin.math.round
 
 class Canvas(val width: Int, val height: Int) {
+    constructor(width: Int, height: Int, color: Color) : this(width, height) {
+        for (x in 0 until width) {
+            for (y in 0 until height) {
+                writePixel(x, y, color)
+            }
+        }
+    }
+
     private val canvas = HashMap<Pair<Int, Int>, Color>()
 
     private val header by lazy {

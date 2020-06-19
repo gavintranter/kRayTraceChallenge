@@ -29,6 +29,19 @@ object CanvasSpec: Spek({
             }
         }
 
+        describe("Creating canvas with given colour") {
+            val c = color(1.0, 0.8, 0.6)
+            val canvas = Canvas(10, 10, c)
+
+            it("every pixel will be colour (1.0, 0.8, 0.6") {
+                for(x in 0 until canvas.width) {
+                    for (y in 0 until canvas.height) {
+                        assertEquals(c, canvas.getPixelAt(x, y))
+                    }
+                }
+            }
+        }
+
         describe("PPM output") {
             describe("Constructing the PPM header") {
                 val canvas = Canvas(5, 3)
