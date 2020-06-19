@@ -27,5 +27,17 @@ object CanvasSpec: Spek({
                 assertEquals(Color.RED, canvas.getPixelAt(2, 3))
             }
         }
+
+        describe("PPM output") {
+            describe("Constructing the PPM header") {
+                val canvas = Canvas(5, 3)
+
+                val header = canvas.toPpm()
+
+                it("header will be P3\n5 3\n255") {
+                    assertEquals("P3\n5 3\n255", header)
+                }
+            }
+        }
     }
 })

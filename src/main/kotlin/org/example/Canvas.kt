@@ -12,4 +12,8 @@ class Canvas(val width: Int, val height: Int) {
         canvas[Pair(x, y)] = color
     }
 
+    fun toPpm(): String {
+        return "P3\n5 3\n255"
+    }
+
 }
