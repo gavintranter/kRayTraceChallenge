@@ -1,5 +1,6 @@
 package org.example
 
+import org.example.Color.Factory.color
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
@@ -31,11 +32,35 @@ object CanvasSpec: Spek({
         describe("PPM output") {
             describe("Constructing the PPM header") {
                 val canvas = Canvas(5, 3)
+                val result = canvas.toPpm()
 
-                val header = canvas.toPpm()
+                it("header (line 1 - 3) will be P3\n5 3\n255") {
+                    assertEquals("P3", result[0])
+                    assertEquals("5 3", result[1])
+                    assertEquals("255", result[2])
+                }
+            }
 
-                it("header will be P3\n5 3\n255") {
-                    assertEquals("P3\n5 3\n255", header)
+            describe("Constructing the PPM pixel data") {
+                val canvas = Canvas(5, 3)
+                val c1 = color(1.5, 0.0, 0.0)
+                val c2 = color(0.0, 0.5, 0.0)
+                val c3 = color(-0.5, 0.0, 1.0)
+
+                canvas.writePixel(0, 0, c1)
+                canvas.writePixel(2, 1, c2)
+                canvas.writePixel(4, 2, c3)
+
+                val result = canvas.toPpm()
+
+                it("data lines (4 - 6) will be\n" +
+                        "255 0 0 0 0 0 0 0 0 0 0 0 0 0 0" +
+                        "0 0 0 0 0 0 0 128 0 0 0 0 0 0 0" +
+                        "0 0 0 0 0 0 0 0 0 0 0 0 0 0 255"
+                ) {
+                    assertEquals("255 0 0 0 0 0 0 0 0 0 0 0 0 0 0", result[3])
+                    assertEquals("0 0 0 0 0 0 0 128 0 0 0 0 0 0 0", result[4])
+                    assertEquals("0 0 0 0 0 0 0 0 0 0 0 0 0 0 255", result[5])
                 }
             }
         }
