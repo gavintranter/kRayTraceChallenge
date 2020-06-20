@@ -14,7 +14,7 @@ class Canvas(val width: Int, val height: Int) {
     private val canvas = HashMap<Pair<Int, Int>, Color>()
 
     private val header: List<String> by lazy {
-        listOf("P3", "$width $height", "255")
+        listOf("P3\n", "$width $height\n", "255\n")
     }
 
     fun getPixelAt(x: Int, y: Int): Color {

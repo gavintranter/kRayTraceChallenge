@@ -48,9 +48,9 @@ object CanvasSpec: Spek({
                 val result = canvas.toPpm()
 
                 it("header (line 1 - 3) will be P3\n5 3\n255") {
-                    assertEquals("P3", result[0])
-                    assertEquals("5 3", result[1])
-                    assertEquals("255", result[2])
+                    assertEquals("P3\n", result[0])
+                    assertEquals("5 3\n", result[1])
+                    assertEquals("255\n", result[2])
                 }
             }
 
