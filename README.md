@@ -4,5 +4,6 @@
 The intention is to follow the book and have a functioning Ray Tracer.
 This will be implemented in Kotlin.
 
-* Chapter One:  Tuples, Points and Vectors              Complete
-* Chapter Two:  Drawing on a Canvas
+* Chapter One:      Tuples, Points and Vectors              Complete
+* Chapter Two:      Drawing on a Canvas                     Complete
+* Chapter Three:    Matrices                                In progress
