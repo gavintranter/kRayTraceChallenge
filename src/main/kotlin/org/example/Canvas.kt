@@ -54,6 +54,7 @@ class Canvas(val width: Int, val height: Int) {
             }
             .split("\n")
             .map { it.trim() }
+            .map { it + "\n" }
     }
 
     private fun joinWithoutSplittingValues(acc: String, value: Int): String {
