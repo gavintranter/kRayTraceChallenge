@@ -1,5 +1,10 @@
 package org.example
 
+import org.example.Color.Factory.BLACK
+import org.example.Color.Factory.BLUE
+import org.example.Color.Factory.GREEN
+import org.example.Color.Factory.RED
+import org.example.Color.Factory.WHITE
 import org.example.Color.Factory.color
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.spekframework.spek2.Spek
@@ -105,6 +110,22 @@ object CanvasSpec: Spek({
 
                 it("PPM ends with newline") {
                     assertEquals('\n', result.last().last())
+                }
+            }
+
+            describe("ignores points outside the canvas") {
+                val canvas = Canvas(5, 5, color(1.0, 0.8, 0.6))
+
+                canvas.writePixel(-1, 0, RED)
+                canvas.writePixel(5,0, BLUE)
+                canvas.writePixel(0, -1, GREEN)
+                canvas.writePixel(0, 5, WHITE)
+
+                it("will only have black pixels") {
+                    assertEquals(BLACK, canvas.getPixelAt(-1, 0))
+                    assertEquals(BLACK, canvas.getPixelAt(-5, 0))
+                    assertEquals(BLACK, canvas.getPixelAt(0, -1))
+                    assertEquals(BLACK, canvas.getPixelAt(0, 5))
                 }
             }
         }

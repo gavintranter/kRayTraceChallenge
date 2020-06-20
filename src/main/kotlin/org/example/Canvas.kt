@@ -23,6 +23,9 @@ class Canvas(val width: Int, val height: Int) {
     }
 
     fun writePixel(x: Int, y: Int, color: Color) {
+        if (x !in 0 until width || y !in 0 until height) {
+            return
+        }
         canvas[Pair(x, y)] = color
     }
 
