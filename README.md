@@ -23,4 +23,4 @@ This will be implemented in Kotlin.
 * Chapter Seventeen: Next Steps
 * Chapter Bonus 01:  Texture Mapping
 * Chapter Bonus 02:  Bounding Boxes and Hierarchies
-* Chapter Bonus 03:  Rendering Soft Shadowa
+* Chapter Bonus 03:  Rendering Soft Shadows
