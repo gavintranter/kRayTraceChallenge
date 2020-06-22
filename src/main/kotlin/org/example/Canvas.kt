@@ -3,6 +3,8 @@ package org.example
 import kotlin.math.round
 
 class Canvas(val width: Int, val height: Int) {
+    private data class Coordinate(val x: Int, val y: Int)
+
     constructor(width: Int, height: Int, color: Color) : this(width, height) {
         for (x in 0 until width) {
             for (y in 0 until height) {
@@ -11,22 +13,21 @@ class Canvas(val width: Int, val height: Int) {
         }
     }
 
-    private val canvas = HashMap<Pair<Int, Int>, Color>()
+    private val canvas = HashMap<Coordinate, Color>()
 
     private val header: List<String> by lazy {
         listOf("P3\n", "$width $height\n", "255\n")
     }
 
     fun getPixelAt(x: Int, y: Int): Color {
-        val key = Pair(x, y)
-        return canvas.getOrDefault(key, Color.BLACK)
+        return canvas.getOrDefault(Coordinate(x, y), Color.BLACK)
     }
 
     fun writePixel(x: Int, y: Int, color: Color) {
         if (x !in 0 until width || y !in 0 until height) {
             return
         }
-        canvas[Pair(x, y)] = color
+        canvas[Coordinate(x, y)] = color
     }
 
     fun toPpm(): List<String> {
@@ -50,7 +51,7 @@ class Canvas(val width: Int, val height: Int) {
         return listOf(r, g, b)
     }
 
-    private fun clamp(n: Double) = n.coerceAtLeast(0.0).coerceAtMost(255.0)
+    private fun clamp(channel: Double) = channel.coerceAtLeast(0.0).coerceAtMost(255.0)
 
     private fun toPpmLines(row: List<Int>): List<String> {
         return row.fold("") { acc, value -> joinWithoutSplittingValues(acc, value)
