@@ -48,14 +48,34 @@ object TuplesSpec: Spek({
     }
 
     describe("Colours") {
-        val colour by memoized { color(0.9, 0.6, 0.75) }
+        val color by memoized { color(0.9, 0.6, 0.75) }
 
         it("is not a vector") {
-            assertEquals(false, colour.isVector())
+            assertEquals(false, color.isVector())
         }
 
         it("is not a point") {
-            assertEquals(false, colour.isPoint())
+            assertEquals(false, color.isPoint())
+        }
+
+        it("is a colour") {
+            assertEquals(Color(0.9, 0.6, 0.75, 0.0), color)
+        }
+
+        describe("Create colour of one of the defaults") {
+            val white = Color.WHITE
+            val black = Color.BLACK
+            val red = Color.RED
+            val green = Color.GREEN
+            val blue = Color.BLUE
+
+            it("the default is reused") {
+                assertSame(white, color(1.0, 1.0, 1.0))
+                assertSame(black, color(0.0, 0.0, 0.0))
+                assertSame(red, color(1.0, 0.0, 0.0))
+                assertSame(green, color(0.0, 1.0, 0.0))
+                assertSame(blue, color(0.0, 0.0, 1.0))
+            }
         }
     }
 
