@@ -31,8 +31,8 @@ class Canvas(val width: Int, val height: Int) {
     }
 
     fun toPpm(): List<String> {
-        val pixels = IntRange(0, height - 1).map { y ->
-            IntRange(0, width - 1).map { x -> getPixelAt(x, y) }
+        val pixels = (0 until height).map { y ->
+                (0 until width).map { x -> getPixelAt(x, y) }
                 .map { mapColor(it) }
                 .flatten()
             }
@@ -54,8 +54,7 @@ class Canvas(val width: Int, val height: Int) {
     private fun clamp(channel: Double) = channel.coerceAtLeast(0.0).coerceAtMost(255.0)
 
     private fun toPpmLines(row: List<Int>): List<String> {
-        return row.fold("") { acc, value -> joinWithoutSplittingValues(acc, value)
-            }
+        return row.fold("") { acc, value -> joinWithoutSplittingValues(acc, value) }
             .split("\n")
             .map { it.trim() }
             .map { it + "\n" }
