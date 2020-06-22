@@ -6,8 +6,8 @@ class Canvas(val width: Int, val height: Int) {
     private data class Coordinate(val x: Int, val y: Int)
 
     constructor(width: Int, height: Int, color: Color) : this(width, height) {
-        for (x in 0 until width) {
-            for (y in 0 until height) {
+        (0 until width).forEach { x ->
+            (0 until height).forEach { y ->
                 writePixel(x, y, color)
             }
         }

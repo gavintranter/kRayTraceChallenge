@@ -27,7 +27,7 @@ class Two (e: Environment, private val c: Canvas) {
 
 fun main(args: Array<String>) {
     val e = Environment(Tuple.vector(0.0, -0.1, 0.0), Tuple.vector(-0.01, 0.0, 0.0))
-    val two = Two(e, Canvas(900, 550))
+    val two = Two(e, Canvas(900, 550, Color.WHITE))
 
     val plot = two.plot()
     File("plot.ppm").writeText(plot.joinToString("") { it })
